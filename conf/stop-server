@@ -1,0 +1,27 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+# Display a cool banner
+clear
+toilet -F metal "STOPPING"
+
+# Stop Apache & MySQL
+echo -e "\nStopping Apache and MariaDB..."
+
+# Stop Apache if it's running
+if pgrep -x "httpd" > /dev/null; then
+    apachectl stop > /dev/null 2>&1
+    echo "Apache stopped successfully."
+else
+    apachectl stop
+    echo "Apache is not running."
+fi
+
+# Stop MySQL if it's running
+if pgrep -x "mysqld" > /dev/null; then
+    killall mysqld mysqld_safe > /dev/null 2>&1
+    echo "MySQL stopped successfully."
+else
+    echo "MySQL is not running."
+fi
+
+echo -e "\nAll services have been stopped."

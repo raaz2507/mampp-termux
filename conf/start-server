@@ -1,0 +1,17 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+# Display a cool banner
+clear
+toilet -F metal "STARTING"
+
+# Run Apache & MySQL in the background
+echo -e "\n Starting Apache and MariaDB..."
+mysqld_safe --skip-grant-tables > /dev/null 2>&1 & 
+sleep 2
+apachectl start > /dev/null 2>&1 & 
+
+# Display success message
+echo -e "\n Server is now running!"
+echo "Access WEB server at: http://localhost:8080/"
+echo "Access Database at: http://localhost:8080/phpmyadmin"
+echo "If there's an error, try running this script again!"
